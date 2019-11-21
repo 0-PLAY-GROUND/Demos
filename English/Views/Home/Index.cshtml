@@ -1,0 +1,72 @@
+﻿@model English.Models.WordVM
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h5>
+    <label class="label label-danger">
+        <a href='@Model.WordLink'>@Html.DisplayFor(model => model.Word.WordText)</a>                
+
+    </label>
+    
+</h5>
+<div class="accordion" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Description
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+
+                @Html.DisplayFor(model => model.Word.Description)
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Examples
+                </button>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">                           
+            <div class="card-body">
+
+                @Html.ActionLink("Add", "Create", "Examples", new { WordId = Model.Word.ID })
+
+                @if (Model.Word.Examples != null)
+                {
+                    foreach (var example in Model.Word.Examples)
+                    {
+                        <ul>
+
+                            <li>        @Html.DisplayFor(e => example.ExampleText)</li>
+                            <li>@Html.DisplayFor(e => example.ExampleTranslation)</li>
+                        </ul>
+                    }
+                }
+
+            </div>
+            </div>
+        </div>
+    <div class="card">
+        <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Translations
+                </button>
+            </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+                @Html.DisplayFor(model => model.Word.Translation)
+            </div>
+        </div>
+    </div>
+</div>
